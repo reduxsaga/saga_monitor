@@ -1,8 +1,6 @@
-/// Support for doing something awesome.
+///Saga Monitor library for Redux Saga Middleware
 ///
-/// More dartdocs go here.
+///Saga Monitor monitors running sagas and effects to track middleware for Redux Saga
 library saga_monitor;
 
 export 'src/simpleSagaMonitor.dart';
-
-// TODO: Export any libraries intended for clients of this package.

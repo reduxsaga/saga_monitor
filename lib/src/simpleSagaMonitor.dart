@@ -16,7 +16,8 @@ class _EffectDescription {
   DateTime start = DateTime.now();
   DateTime end;
 
-  _EffectDescription(this.effectId, this.parentEffectId, this.description, this.effect);
+  _EffectDescription(
+      this.effectId, this.parentEffectId, this.description, this.effect);
 }
 
 /// Implemented monitor logger to log console output.
@@ -61,10 +62,10 @@ class SimpleSagaMonitor implements SagaMonitor {
 
   /// If true monitor gives more details
   bool verbose;
-  
+
   /// If true shows tree lines
   bool treeLines;
-  
+
   /// Invoked on every new log entry
   MonitorLogHandler onLog;
 
@@ -111,8 +112,10 @@ class SimpleSagaMonitor implements SagaMonitor {
   }
 
   @override
-  void effectTriggered(int effectId, int parentEffectId, dynamic label, dynamic effect) {
-    var ed = _EffectDescription(effectId, parentEffectId, '${effect.runtimeType}', effect);
+  void effectTriggered(
+      int effectId, int parentEffectId, dynamic label, dynamic effect) {
+    var ed = _EffectDescription(
+        effectId, parentEffectId, '${effect.runtimeType}', effect);
 
     _effectsById[effectId] = ed;
     _addChild(parentEffectId, effectId);
@@ -130,9 +133,10 @@ class SimpleSagaMonitor implements SagaMonitor {
   }
 
   @override
-  void rootSagaStarted(
-      int effectId, Function saga, List args, Map<Symbol, dynamic> namedArgs, String name) {
-    var ed = _EffectDescription(effectId, 0, 'Root${name == null ? '[$name]' : ''}', null);
+  void rootSagaStarted(int effectId, Function saga, List args,
+      Map<Symbol, dynamic> namedArgs, String name) {
+    var ed = _EffectDescription(
+        effectId, 0, 'Root${name == null ? '[$name]' : ''}', null);
 
     _effectsById[effectId] = ed;
     _addChild(0, effectId);
@@ -146,7 +150,7 @@ class SimpleSagaMonitor implements SagaMonitor {
     }
   }
 
-  /// Prints everything to the console 
+  /// Prints everything to the console
   void printToConsole() {
     getLines().forEach(print);
   }
@@ -161,7 +165,8 @@ class SimpleSagaMonitor implements SagaMonitor {
 
   final _defaultSpace = '   ';
 
-  void _logChildren(List<String> lines, int parentId, int level, String prefix) {
+  void _logChildren(
+      List<String> lines, int parentId, int level, String prefix) {
     var list = _childByParent[parentId];
     if (list != null && list.isNotEmpty) {
       for (var i = 0; i < list.length; i++) {
@@ -186,7 +191,8 @@ class SimpleSagaMonitor implements SagaMonitor {
         var ed = _effectsById[id];
         if (ed != null) {
           _logEffect(lines, ed, '$prefix$treeStart');
-          _logChildren(lines, id, level + 1, '$prefix$treeSubStart$_defaultSpace');
+          _logChildren(
+              lines, id, level + 1, '$prefix$treeSubStart$_defaultSpace');
         }
       }
     }
@@ -197,7 +203,6 @@ class SimpleSagaMonitor implements SagaMonitor {
         '${_getStatusSymbol(ed.status)}${ed.description} '
         '${verbose ? ed.effect : ''}');
   }
-
 
   String _getStatusSymbol(_EffectStatus status) {
     switch (status) {
