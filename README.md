@@ -32,6 +32,8 @@ Sample output:
 .       └─ ⌛Take
 ```
 
+Check [vanilla_counter](https://github.com/reduxsaga/vanilla_counter) example `monitor-console` branch for completed code.
+
 To handle where to log implement [onLog] event.
 Following example demonstrates how to get lines and
 output them to a div element on an html page.
@@ -53,8 +55,10 @@ index.dart
   ...
 ```
 
+
 index.html
 ```html
+...
 <p>
     Clicked: <span id="value">0</span> times
     <button id="increment">+</button>
@@ -65,7 +69,10 @@ index.html
     </br>
     Saga Monitor: <div id="monitor"></div>
 </p>
+...
 ```
+
+Check [vanilla_counter](https://github.com/reduxsaga/vanilla_counter) example `monitor-browser` branch for completed code.
 
 ### License
 Copyright (c) 2020 Bilal Uslu.
