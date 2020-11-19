@@ -2,7 +2,7 @@ name: saga_monitor
 maintainer: Bilal Uslu (@bilaluslu)
 description: Simple Saga Monitor for monitoring sagas and effects created by Redux Saga.
 homepage: https://github.com/reduxsaga/saga_monitor
-version: 1.0.2
+version: 1.0.3
 repository: https://github.com/reduxsaga/saga_monitor
 
 environment:
