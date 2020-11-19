@@ -10,7 +10,7 @@ environment:
 
 dependencies:
   redux: ^4.0.0
-  redux_saga: ^1.1.9
+  redux_saga: ^2.0.0
 
 dev_dependencies:
   pedantic: ^1.9.0
