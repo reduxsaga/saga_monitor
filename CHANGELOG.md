@@ -5,3 +5,9 @@
 ## 1.0.3
 
 - redux_saga v2.0.0 migration
+
+## 1.1.0
+
+- redux_saga v2.1.0 upgrade
+
+
