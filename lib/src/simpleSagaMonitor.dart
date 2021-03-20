@@ -14,7 +14,7 @@ class _EffectDescription {
   _EffectStatus status = _EffectStatus.Pending;
   dynamic effect;
   DateTime start = DateTime.now();
-  DateTime end;
+  DateTime? end;
 
   _EffectDescription(
       this.effectId, this.parentEffectId, this.description, this.effect);
@@ -67,7 +67,7 @@ class SimpleSagaMonitor implements SagaMonitor {
   bool treeLines;
 
   /// Invoked on every new log entry
-  MonitorLogHandler onLog;
+  MonitorLogHandler? onLog;
 
   /// Creates an instance of a SimpleSagaMonitor
   SimpleSagaMonitor({
@@ -82,7 +82,7 @@ class SimpleSagaMonitor implements SagaMonitor {
   @override
   void effectCancelled(int effectId) {
     var ed = _effectsById[effectId];
-    ed.status = _EffectStatus.Cancelled;
+    ed?.status = _EffectStatus.Cancelled;
 
     _log();
   }
@@ -90,8 +90,8 @@ class SimpleSagaMonitor implements SagaMonitor {
   @override
   void effectRejected(int effectId, dynamic error) {
     var ed = _effectsById[effectId];
-    ed.error = error;
-    ed.status = _EffectStatus.Rejected;
+    ed?.error = error;
+    ed?.status = _EffectStatus.Rejected;
 
     _log();
   }
@@ -99,13 +99,13 @@ class SimpleSagaMonitor implements SagaMonitor {
   @override
   void effectResolved(int effectId, dynamic result) {
     var ed = _effectsById[effectId];
-    ed.end = DateTime.now();
-    var duration = ed.end.difference(ed.start);
-    ed.result = result;
-    ed.status = _EffectStatus.Resolved;
-    ed.description += ', duration:${duration.inMilliseconds}ms';
-    if (ed.effect is EffectWithResult || (!(ed.effect is Effect))) {
-      ed.description += ', result:($result)';
+    ed?.end = DateTime.now();
+    var duration = ed?.end?.difference(ed.start);
+    ed?.result = result;
+    ed?.status = _EffectStatus.Resolved;
+    ed?.description += ', duration:${duration?.inMilliseconds}ms';
+    if (ed?.effect is EffectWithResult || (!(ed?.effect is Effect))) {
+      ed?.description += ', result:($result)';
     }
 
     _log();
@@ -133,8 +133,8 @@ class SimpleSagaMonitor implements SagaMonitor {
   }
 
   @override
-  void rootSagaStarted(int effectId, Function saga, List args,
-      Map<Symbol, dynamic> namedArgs, String name) {
+  void rootSagaStarted(int effectId, Function saga, List? args,
+      Map<Symbol, dynamic>? namedArgs, String? name) {
     var ed = _EffectDescription(
         effectId, 0, 'Root${name == null ? '[$name]' : ''}', null);
 
@@ -146,7 +146,7 @@ class SimpleSagaMonitor implements SagaMonitor {
 
   void _log() {
     if (onLog != null) {
-      onLog(this);
+      onLog!(this);
     }
   }
 
@@ -204,7 +204,7 @@ class SimpleSagaMonitor implements SagaMonitor {
         '${verbose ? ed.effect : ''}');
   }
 
-  String _getStatusSymbol(_EffectStatus status) {
+  String? _getStatusSymbol(_EffectStatus status) {
     switch (status) {
       case _EffectStatus.Resolved:
         return '✓';
@@ -215,6 +215,5 @@ class SimpleSagaMonitor implements SagaMonitor {
       case _EffectStatus.Cancelled:
         return '✘';
     }
-    return null;
   }
 }
