@@ -11,3 +11,8 @@
 - redux_saga v2.1.0 upgrade
 
 
+## 2.0.0
+
+- Updated to null safety
+
+
