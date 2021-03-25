@@ -15,4 +15,9 @@
 
 - Updated to null safety
 
+## 2.0.1
+
+- pub dev fixes
+
+
 
